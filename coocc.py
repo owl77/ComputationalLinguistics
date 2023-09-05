@@ -6,6 +6,8 @@ grammar = ["the","of", "in", "for", "you", "they", "from","to", "by", "but", "i"
 "most"
 ]
 
+punctuation = [":",",",";","?","!",".","'s","(",")","'","-", '"']
+
 text = []
 lex = input("Enter term : ")
 
@@ -14,25 +16,14 @@ with open("plato.txt", 'r',  encoding='utf8' ) as f:
     words = line.split()
     if lex in words:
      for w in words:
-       w = w.replace(":","")
-       w = w.replace(",","")
-       w = w.replace(";","")
-       w = w.replace("?","")
-       w = w.replace("!","")
-       w = w.replace(".", "")
-       w = w.replace("'s","")
-       w = w.replace("(","")
-       w = w.replace(")","")
-       w = w.replace("'","")
-       w = w.replace("-","")
-       w = w.replace('"',"")
-       w = w.lower()
+       for p in punctuation:
+        w = w.replace(p,"")
+        w = w.lower()
        if not '¯' in w:
-        text.append(w)
+         text.append(w)
 f.close()
 
 text = [w for w in text if not w in grammar and len(w) > 1]
-
 
 
 voc = sorted(list(set(text)))
@@ -45,9 +36,6 @@ for v in voc:
   for w in text:
    if w == v:
      freq[v] = freq[v] +1
-print("")
-print("Frequencies")
-print("")
 
 def get_max(dic):
  max = 0
@@ -69,8 +57,6 @@ def dic_order(dic):
   dic2.pop(aux)
 
  return ord
-
-
 
   
 name = lex +"freq.txt"
