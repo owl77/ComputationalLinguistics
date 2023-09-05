@@ -6,6 +6,9 @@ grammar = ["the","of", "in", "for", "you", "they", "from","to", "by", "but", "i"
 "most"
 ]
 
+
+punctuation = [":",",",";","?","!",".","'s","(",")","'","-", '"']
+
 text = []
 
 
@@ -14,20 +17,10 @@ with open("plato.txt", 'r',  encoding='utf8' ) as f:
     words = line.split()
     
     for w in words:
-       w = w.replace(":","")
-       w = w.replace(",","")
-       w = w.replace(";","")
-       w = w.replace("?","")
-       w = w.replace("!","")
-       w = w.replace(".", "")
-       w = w.replace("'s","")
-       w = w.replace("(","")
-       w = w.replace(")","")
-       w = w.replace("'","")
-       w = w.replace("-","")
-       w = w.replace('"',"")
-       w = w.lower()
-       if not '¯' in w:
+      for p in punctuation:
+        w = w.replace(p,"")
+      w = w.lower()
+      if not '¯' in w:
         text.append(w)
 f.close()
 

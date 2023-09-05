@@ -14,16 +14,18 @@ lex = input("Enter term : ")
 with open("plato.txt", 'r',  encoding='utf8' ) as f:
  for line in f:
     words = line.split()
-    if lex in words:
-     for w in words:
+    
+    newwords= []
+    for w in words:
        for p in punctuation:
         w = w.replace(p,"")
-        w = w.lower()
-       if not '¯' in w:
-         text.append(w)
+       w = w.lower()
+       newwords.append(w)
+    if lex in newwords:
+      text = text + newwords
 f.close()
 
-text = [w for w in text if not w in grammar and len(w) > 1]
+text = [w for w in text if not w in grammar and len(w) > 1 and not '¯' in w]
 
 
 voc = sorted(list(set(text)))
