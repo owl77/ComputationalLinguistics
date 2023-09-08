@@ -1,0 +1,1 @@
+cat FILENAME | tr '[:upper:]' '[:lower:]' | tr -c '[:alnum:]\n\r' ' ' | tr ' ' '\n' | sort | uniq -c
